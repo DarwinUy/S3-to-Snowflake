@@ -47,12 +47,6 @@ sfWarehouse = snowflakeConfig['sf.warehouse']
 sfPrivateKey = SnowflakeConnection.getPrivateKey(keyFile=SfKeyfile, snowflakePassword=SfPassphrase)
 sfRole = 'SYS_SOURCE'
 
-# Email
-# receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com", "internationaltracking@ascap.com"]
-sender_email = "dataengineering@ascap.com"
-err_receiver = ["dataengineering@ascap.com"]
-err_sender_email = "dataengineering@ascap.com"
-
 
 
 def main():
@@ -112,16 +106,7 @@ def main():
         s3FileDF_1, _ = PandasProcessing.pandasInferSchema(s3FileDF_0)
         snowflakeSchemaDefinition_0 = PandasProcessing.getSchemaPandas2Snowflake(s3FileDF_1)
         sfDatabase, sfTable, sfFile = splitFileName(fileKey=file)
-        if sfDatabase.lower() == "team_concert":
-            receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com"]
-        elif sfDatabase.lower() == "team_data_eng":
-            receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com"]
-        elif sfDatabase.lower() == "team_data_strat":
-            receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com"]
-        elif sfDatabase.lower() == "team_international":
-            receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com", "internationaltracking@ascap.com"]
-        else:
-            receiver_email = ["datastrategy@ascap.com", "dataengineering@ascap.com"]
+
 
         try:
             snowflakeConnection = SnowflakeConnection.createSnowflakeConnection(sfAccount=sfAccount, sfUser=sfUser,
