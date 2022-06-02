@@ -26,10 +26,6 @@ sfPrivateKey = SnowflakeConnection.getPrivateKey(keyFile=SfKeyfile, snowflakePas
 sfRole = 'SYS_SOURCE'
 
 # Email
-receiver_email = "duyuy@ascap.com"
-sender_email = "duyuy@ascap.com"
-err_receiver = "duyuy@ascap.com"
-err_sender_email = "duyuy@ascap.com"
 
 files = []
 sfConn = SnowflakeConnection.createSnowflakeConnection(sfAccount = sfAccount, sfUser = sfUser, sfPrivateKey = sfPrivateKey, sfWarehouse = 'USERS_DATA', sfDatabase = 'INTERNATIONAL', sfSchema = 'PROCESSED')
