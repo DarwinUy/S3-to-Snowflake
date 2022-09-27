@@ -1,8 +1,7 @@
-#!/usr/bin/env python
 # title           :PandasProcessing.py
 # description     :This will create a header for a python script.
 # author          :Darwin Uy
-# date            :2021-11-11
+# date            :2022-6-2
 # version         :0.1
 # usage           :python pyscript.py
 # notes           :
@@ -12,15 +11,25 @@ import pandas as pd
 
 
 def importToPandas(object, delimiter, header=True):
-    ''' Description: This is a function that reads a file from S3 and imports it into pandas
-        Input:
-            object:
-            delimeter:
-            header:
+    """
+    Description
+    -----------
+    This is a function that reads a file from S3 and imports it into pandas
 
-        Output:
-            Pandas Dataframe of S3 object
-        '''
+    Args
+    ----
+    object : object
+        S3 object
+    delimeter : string
+        character used to beginning and end of the field
+    header : int
+        indicates the header row of the file
+
+    Returns
+    -------
+    df : object
+        Pandas Dataframe of S3 object
+    """
     if header == True:
         df = pd.read_csv(object['Body'], sep=delimiter, header=0)
     if header == False:
@@ -29,30 +38,46 @@ def importToPandas(object, delimiter, header=True):
 
 
 def pandasInferSchema(pandasDataframe):
-    ''' Description: This is a function that infers the schema from a dataframe
-        Input:
-            pandas dataframe
+    """
+    Description
+    -----------
+    This is a function that infers the schema from a dataframe
 
-        Output:
-            same dataframe with types infered
-            types that were inferred
+    Args
+    ----
+    pandasDataframe : object
+        a pandas dataframe
 
-        '''
+    Returns
+    -------
+    pandasDataframeInfered : object
+        dataframe with types infered
+    pandasDataframeInferedTypes : list
+        list of data types that were inferred
+    """
     pandasDataframeInfered = pandasDataframe.infer_objects()
     pandasDataframeInferedTypes = pandasDataframe.infer_objects().dtypes
     return pandasDataframeInfered, pandasDataframeInferedTypes
 
 
 def getSchemaPandas2Snowflake(pandasDataFrame):
-    ''' Description: This is a function that creates a
-        Input:
-            pandasDataFrame
+    """
+    Description
+    -----------
+    This program converts the pandas schema to snowflake and writes the string that defines a snowflake table
 
-        Output:
-            schema: string that defines the schema for table creation in Snowflake
+    Args
+    ----
+    pandasDataFrame : object
+        pandas dataframe to have the schema extracted and converted
 
-        '''
+    Returns
+    -------
+    schema : string
+        string that defines the schema for table creation in Snowflake
+    """
     col_names = pandasDataFrame.columns.tolist()  # get columns
+    # col_names = [f'\"{x}\"' for x in col_names]  # see if can add
     col_types = pandasDataFrame.dtypes.values.tolist()  # get list of dtypes
     col_types = [str(x) for x in col_types]  # convert from dtype to string
     col_types = [x + ',' for x in col_types]  #

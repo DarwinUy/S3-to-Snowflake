@@ -1,10 +1,9 @@
-#!/usr/bin/env python
 # title           :Communications.py
 # description     :This is where we store the email function
 # author          :Darwin Uy
-# date            :2021-11-01
-# version         :0.1
-# usage           :python pyscript.py
+# date            :2022-6-2
+# version         :1.0
+# usage           :
 # notes           :
 # python_version  :3.9
 # ==============================================================================
@@ -18,19 +17,32 @@ import smtplib, ssl
 
 # Email
 def send_mail(sender_email, receiver_email, subject, body, attachments=[]):
-    def function():
-        ''' Description: This is a function that
-            Input:
-                sender_email
-                receiver_email: List of strings that are the reciever email addresses
-                subject: String that will be the email subject
-                body
-                attachments
+    """
+    Description
+    -----------
+    A program that sends an email with attachments
 
-            Output:
+    Args
+    ----
+    sender_email: string, list of strings
+        email of sender
+    receiver_email: string, list of strings
+        email of reciever
+    subject: string
+        subject of the email sent
+    body: string
+        body of the email
+    attachments: list
+        list of attachments that are to be sent with the email
 
-            '''
-        {}
+    Returns
+    -------
+    None
+
+    TODO
+    Fix sender for when there is a single email
+        - program splits the display name
+    """
     message = MIMEMultipart()
     message["From"] = sender_email
     message["To"] = ', '.join(receiver_email)
@@ -62,6 +74,6 @@ def send_mail(sender_email, receiver_email, subject, body, attachments=[]):
     # Log in to server using secure context and send email
     context = ssl.create_default_context()
 
-    with smtplib.SMTP("smtp.ascap.com") as server:
+    with smtplib.SMTP("smtp._____.com") as server:
         server.sendmail(sender_email, receiver_email, text)
     print("Mail sent to user")
