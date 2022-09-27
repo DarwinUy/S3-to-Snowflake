@@ -158,16 +158,14 @@ def s3_to_sf(config_yaml_path):
             sfTable_name = fix_table_col_names(sfTable)
 
             # assign emails
-            if sfDatabase.lower() == "team_concert":
-                receiver_email = [email_config['email.DataStrategy'], email_config['email.DataEngineering']]
-            elif sfDatabase.lower() == "team_data_eng":
-                receiver_email = [email_config['email.DataEngineering']]
-            elif sfDatabase.lower() == "team_data_strat":
-                receiver_email = [email_config['email.DataStrategy'], email_config['email.DataEngineering']]
-            elif sfDatabase.lower() == "team_international":
-                receiver_email = [email_config['email.DataEngineering'], email_config['email.International']]
+            if sfDatabase.lower() == "team_A":
+                receiver_email = [email_config['email. A'], email_config['email.B']]
+            elif sfDatabase.lower() == "team_B":
+                receiver_email = [email_config['email.B']]
+            elif sfDatabase.lower() == "team_C":
+                receiver_email = [email_config['email. C'], email_config['email.C']]
             else:
-                receiver_email = [email_config['email.DataEngineering']]
+                receiver_email = [email_config['email.B']]
 
             ## assign delimeter
             if file.endswith('.txt'):
